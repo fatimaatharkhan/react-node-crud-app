@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    image: fatimaatharkhan/node-backend:latest  # 👈 Use image instead of build
+    container_name: node-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/CC
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    image: mongo:5.0
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:

@@ -1,0 +1,15 @@
+# Use official Node.js LTS image
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+# Copy source code and .env
+COPY . .
+COPY .env .env
+
+EXPOSE 5000
+
+CMD ["node", "server.js"]
